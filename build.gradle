@@ -24,17 +24,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-tasks.named('jar') {
-	manifest {
-		attributes(
-				'Implementation-Title': project.name,
-				'Implementation-Version': project.version,
-				'Main-Class': "com.example.PracticeBasicCI.Main"
-		)
-	}
-
-	from {
-		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-	}
-}

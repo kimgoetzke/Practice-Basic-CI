@@ -1,8 +1,9 @@
 name: Feature CI
 
 on:
-  branches:
-    - 'feature/**'
+  push:
+    branches:
+      - 'feature/**'
 
 permissions:
   contents: read

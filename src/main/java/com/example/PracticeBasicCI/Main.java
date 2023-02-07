@@ -20,4 +20,7 @@ public class Main {
 		log.info("App launched.");
 	}
 
+	public String testMe() {
+		return "OK";
+	}
 }

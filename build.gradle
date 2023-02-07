@@ -13,6 +13,10 @@ application {
 	mainClass = 'com.example.PracticeBasicCI.Main'
 }
 
+bootJar {
+	archiveFileName = "Main.jar"
+}
+
 repositories {
 	mavenCentral()
 }

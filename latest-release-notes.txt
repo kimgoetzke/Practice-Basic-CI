@@ -1,0 +1,2 @@
+- First release
+- Uses plain TXT to generate release notes

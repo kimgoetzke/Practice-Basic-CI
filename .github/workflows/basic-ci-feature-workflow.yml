@@ -34,8 +34,8 @@ jobs:
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: kimgoetzke/practice-feature
-          tags: v${{ github.run_number }}, latest
+          image: kimgoetzke/practice
+          tags: feature_v${{ github.run_number }}, feature_latest
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}

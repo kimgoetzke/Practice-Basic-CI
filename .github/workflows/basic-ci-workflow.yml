@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Build & test application
+    name: Build application
     runs-on: ubuntu-latest
     steps:
     - name: Check out
@@ -32,7 +32,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
        image: kimgoetzke/practice
-       tags: ${{ github.ref_name }}_v${{ github.run_number }}, ${{ github.ref_name }}_latest
+       tags: master_v${{ github.run_number }}, master_latest
        registry: docker.io
        username: ${{ secrets.DOCKERHUB_USERNAME }}
        password: ${{ secrets.DOCKERHUB_TOKEN }}

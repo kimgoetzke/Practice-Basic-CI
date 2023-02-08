@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build application
+    name: Build application for feature
     steps:
       - name: Check out
         uses: actions/checkout@v3

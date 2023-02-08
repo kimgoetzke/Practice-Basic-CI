@@ -2,6 +2,7 @@ plugins {
 	id 'application'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -10,6 +11,10 @@ sourceCompatibility = '17'
 
 application {
 	mainClass = 'com.example.PracticeBasicCI.Main'
+}
+
+bootJar {
+	archiveFileName = "Main.jar"
 }
 
 repositories {
@@ -24,3 +29,13 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = false
+		csv.required = false
+	}
+}
+
+build.dependsOn jacocoTestReport

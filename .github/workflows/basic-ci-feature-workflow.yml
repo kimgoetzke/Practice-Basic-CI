@@ -1,0 +1,47 @@
+name: Feature CI
+
+on:
+  push:
+    branches:
+      - 'feature**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build application for feature
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+      - name: Upload Gradle build reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: gradle-build-reports
+          path: build/reports/tests/test
+      - name: Upload Jacoco test coverage reports
+        uses: actions/upload-artifact@v3
+        with:
+            name: jacoco-test-coverage-report
+            path: build/reports/jacoco/test/html/
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: kimgoetzke/practice
+          tags: ${{ github.ref_name }}_v${{ github.run_number }}, ${{ github.ref_name }}_latest
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}

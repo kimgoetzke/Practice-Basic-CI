@@ -45,3 +45,14 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }}'
+          output: 'trivy-results'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+          env:
+            TRIVY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+            TRIVY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+

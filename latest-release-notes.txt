@@ -1,3 +1,1 @@
-- Renamed workflow steps to allow easier selection to make branch protection rules easier to set up
-- Updated README.md
-- Added branch protection
+- Added Trivy vulnerability scans to feature workflow

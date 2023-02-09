@@ -51,8 +51,8 @@ jobs:
           image-ref: 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.ref_name }}_latest'
           format: 'json'
           output: 'trivy-results.json'
-          exit-code: '0'
-          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          severity: 'CRITICAL'
         env:
           TRIVY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           TRIVY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}

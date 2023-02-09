@@ -14,9 +14,11 @@ Branches created with a name starting with `feature-` trigger the GitHub Actions
 2. Build application, run all tests and build scan 
 3. Upload Gradle build reports and attach as artifact to action 
 4. Upload Jacoco test coverage reports and attach as artifact to action 
-5. Create Docker image and upload to DockerHub
+5. Create Docker images and upload to DockerHub
+6. Run Trivy vulnerability scan and fail if critical vulnerabilities detected*
+7. Upload vulnerability scan results as artifact to action
 
-Docker images are named automatically: `feature-{name}-v{github.run_number}`.
+A new Docker image `feature-{name}_v{github.run_number}` is created and `feature-{name}_latest` is overwritten.
 
 ### Main/release workflow
 
@@ -26,11 +28,11 @@ Only branches with the `feature-` prefix are permitted to push to main. Changes 
 2. Set up Java
 3. Validate Gradle wrapper
 2. Build application, run all tests and build scan
-3. Create Docker image and upload to DockerHub 
+3. Create Docker images and upload to DockerHub 
 4. Create a release on GitHub
 5. Use content of `latest_release_notes.txt` as release notes body
 
-Docker images are named automatically: `main-v{github.run_number}`. Release is named `v{github.run_number}`.
+A new Docker image `main_v{github.run_number}` is created and `main_latest` is overwritten. Release is named `v{github.run_number}`.
 
 ### Branch protection
 ![ci-diagram.svg](ci-diagram.svg)
